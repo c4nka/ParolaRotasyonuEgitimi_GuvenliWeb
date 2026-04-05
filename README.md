@@ -28,9 +28,9 @@ Bu proje Windows işletim sisteminde çalışacak şekilde optimize edilmiştir.
 1. **Gereksinimler:** Bilgisayarınızda **Node.js** yüklü olmalıdır.
 2. Proje dosyalarını bir klasöre çıkarın ve VS Code (veya tercih ettiğiniz bir editör) ile açın.
 3. VS Code terminalini (`Terminal > New Terminal`) açın ve bağımlılıkları yüklemek için şu komutu çalıştırın:
-   ```bash
-   npm install
-
+```bash
+npm install
+```
 Kurulum tamamlandıktan sonra sunucuyu başlatın:
  ```bash
 npm start
