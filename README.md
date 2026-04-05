@@ -88,11 +88,11 @@ curl.exe -X POST http://localhost:3000/api/force-rotation
 
 2. adımı aynı token ile tekrar çalıştırın.
 
+Anahtar değiştiği için sistem eski token'ın imzasını tanıyamayacak ve HTTP 403 Forbidden (Token geçersiz veya anahtar süresi dolmuş) hatası fırlatacaktır. Bu sonuç, olası bir token veya private key sızıntısının rotasyon mekanizması ile başarıyla etkisiz hale getirildiğinin matematiksel kanıtıdır.
+
 ## 👤 Hazırlayan
 
 - **Ad Soyad:** Raşit ÇANKAYA
 - **Öğrenci No:** 2420191006
 - **Üniversite:** İstinye Üniversitesi
 - **Bölüm:** Bilişim Güvenliği Teknolojisi (İÖ)
-
-Anahtar değiştiği için sistem eski token'ın imzasını tanıyamayacak ve HTTP 403 Forbidden (Token geçersiz veya anahtar süresi dolmuş) hatası fırlatacaktır. Bu sonuç, olası bir token veya private key sızıntısının rotasyon mekanizması ile başarıyla etkisiz hale getirildiğinin matematiksel kanıtıdır.
