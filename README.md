@@ -32,9 +32,9 @@ Bu proje Windows işletim sisteminde çalışacak şekilde optimize edilmiştir.
    npm install
 
 Kurulum tamamlandıktan sonra sunucuyu başlatın:
-
+ ```bash
 npm start
-
+```
 Konsolda [Güvenlik] Yeni RSA anahtar çifti başarıyla oluşturuldu. ve Sunucu 3000 portunda çalışıyor. mesajlarını gördüğünüzde sistem API isteklerini karşılamaya hazırdır.
 
 ## ⚠️ Sık Karşılaşılan Hatalar ve Çözümleri (Troubleshooting)
