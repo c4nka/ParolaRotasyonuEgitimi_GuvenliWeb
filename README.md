@@ -101,6 +101,34 @@ curl.exe -X POST http://localhost:3000/api/force-rotation
 
 Anahtar değiştiği için sistem eski token'ın imzasını tanıyamayacak ve HTTP 403 Forbidden (Token geçersiz veya anahtar süresi dolmuş) hatası fırlatacaktır. Bu sonuç, olası bir token veya private key sızıntısının rotasyon mekanizması ile başarıyla etkisiz hale getirildiğinin matematiksel kanıtıdır.
 
+## 📸 Ekran Görüntüleri ile Adım Adım Çalışma Kanıtı
+
+Aşağıdaki görseller, sistemin yerel ortamda (localhost) test edilme aşamalarını ve rotasyon mekanizmasının başarılı bir şekilde çalıştığını kanıtlamaktadır.
+
+### Sunucunun Başlatılması ve İlk Anahtarın Üretimi
+Sunucu `npm start` komutu ile ayağa kaldırıldığında, sistem otomatik olarak ilk RSA anahtar çiftini (ID: 1) üretir ve trafiğe hazır hale gelir.
+![Sunucu Başlatma](screenshots/ss1.png)
+![Sunucu Başlatma](screenshots/ss2.png)
+
+### 1. Sisteme Giriş ve Token Alımı
+Kullanıcı kimlik bilgileriyle API'ye istek atılır ve sisteme erişim için şifrelenmiş bir JWT elde edilir.
+![Sisteme Giriş ve Token](screenshots/ss3.png)
+
+### 2. Güvenli Veriye Erişim
+Alınan token, yetkilendirme başlığına (Authorization: Bearer) eklenerek korumalı veriye ulaşılır. Sistem token'ı doğrular ve 200 OK yanıtı ile veriyi döner.
+![Güvenli Veriye Erişim](screenshots/ss4.png)
+
+### 3. Rotasyonu Manuel Tetikleme (90 Gün Simülasyonu)
+Sistemin rotasyon mekanizmasını test etmek için `force-rotation` uç noktasına istek atılır.
+![Manuel Rotasyon Tetikleme](screenshots/ss5.png)
+
+Bu istek sonucunda sunucu tarafında eski anahtar kullanımdan kaldırılır ve anında **Yeni Anahtar ID: 2** üretilir. Bu işlem sunucu loglarına aşağıdaki gibi yansır:
+![Rotasyon Sunucu Logu](screenshots/ss7.png)
+
+### 4. Güvenlik Kanıtı: Rotasyon Sonrası Erişim Reddi (Invalidation)
+Sistemin temel amacı olan "eski sızmış şifrelerin iptali" durumunu kanıtlamak için, **2. adımda kullanılan eski token ile sisteme tekrar erişilmeye çalışılır.** Anahtar değiştiği için sistem eski imzayı tanımaz ve **HTTP 403 (invalid signature)** hatası fırlatarak erişimi güvenli bir şekilde keser.
+![Erişim Reddi Kanıtı](screenshots/ss6.png)
+
 ## 👤 Hazırlayan
 
 - **Ad Soyad:** Raşit ÇANKAYA
