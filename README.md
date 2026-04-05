@@ -42,9 +42,9 @@ Konsolda [Güvenlik] Yeni RSA anahtar çifti başarıyla oluşturuldu. ve Sunucu
 Windows işletim sistemlerinde projeyi ilk defa kurarken (3. Adımda) aşağıdaki PowerShell betik engelleme hatasıyla karşılaşabilirsiniz.
 
 Karşılaşılan Hata:
-
+```bash
 npm : File ... cannot be loaded because running scripts is disabled on this system. ... CategoryInfo: SecurityError: (:) [], PSSecurityException
-
+```
 Hatanın Sebebi: Windows PowerShell, güvenlik politikaları gereği dışarıdan gelen scriptlerin (npm komutları dahil) çalışmasını zararlı yazılım koruması amacıyla varsayılan olarak engeller.
 
 Çözüm 1: PowerShell İznini Düzenleme (Önerilen Kalıcı Çözüm)
@@ -52,9 +52,9 @@ Hatanın Sebebi: Windows PowerShell, güvenlik politikaları gereği dışarıda
 Windows arama çubuğuna PowerShell yazın, sağ tıklayıp "Yönetici olarak çalıştır" (Run as Administrator) seçeneğini seçin.
 
 Aşağıdaki komutu yapıştırıp Enter'a basın:
-
+```bash
 Set-ExecutionPolicy RemoteSigned
-
+```
 Gelen uyarıya Y (veya sistem dilinize göre E) yazarak onay verin. Ardından VS Code'u açıp npm install işlemini tekrar deneyin.
 
 Çözüm 2: Komut İstemcisi (CMD) Kullanımı (Hızlı Çözüm)
@@ -67,23 +67,23 @@ Projenin 90 günlük rotasyon mantığını anında test edebilmek için özel b
 
 1. Sisteme Giriş ve Token Alımı:
 Aşağıdaki komut ile sisteme giriş yapılır ve asimetrik (RS256) şifrelenmiş bir JWT elde edilir.
-
+```bash
 curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"username\": \"admin\", \"password\": \"securepassword\"}"
-
+```
 (Dönen JSON içerisindeki "token" değerini kopyalayın)
 
 2. Güvenli Veriye Erişim Doğrulaması:
 Aşağıdaki komutta <TOKEN> yazan yere kopyaladığınız değeri yapıştırarak yetki gerektiren veriye ulaşmayı deneyin.
-
+```bash
 curl.exe -X GET http://localhost:3000/api/secure-data -H "Authorization: Bearer <TOKEN>"
 (Sonuç: HTTP 200 - Veriye başarıyla ulaşılmalıdır)
-
+```
 3. Rotasyonu Manuel Tetikleme (Zaman Atlaması Simülasyonu):
 Sistemin 90 gün sonra yapacağı otomatik rotasyon işlemini simüle etmek için aşağıdaki isteği gönderin:
-
+```bash
 curl.exe -X POST http://localhost:3000/api/force-rotation
 (Sunucu konsolunda eski anahtarın iptal edilip yeni RSA anahtar çiftinin üretildiğini göreceksiniz. Logları inceleyin.)
-
+```
 4. Rotasyon Sonrası Güvenlik Kanıtı (Erişim Reddi - Invalidation Test):
 
 2. adımı aynı token ile tekrar çalıştırın.
