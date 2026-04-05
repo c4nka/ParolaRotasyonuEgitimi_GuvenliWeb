@@ -37,7 +37,7 @@ npm start
 
 Konsolda [Güvenlik] Yeni RSA anahtar çifti başarıyla oluşturuldu. ve Sunucu 3000 portunda çalışıyor. mesajlarını gördüğünüzde sistem API isteklerini karşılamaya hazırdır.
 
-⚠️ Sık Karşılaşılan Hatalar ve Çözümleri (Troubleshooting)
+## ⚠️ Sık Karşılaşılan Hatalar ve Çözümleri (Troubleshooting)
 
 Windows işletim sistemlerinde projeyi ilk defa kurarken (3. Adımda) aşağıdaki PowerShell betik engelleme hatasıyla karşılaşabilirsiniz.
 
@@ -61,7 +61,7 @@ Gelen uyarıya Y (veya sistem dilinize göre E) yazarak onay verin. Ardından VS
 
 VS Code terminal penceresinin sağ üst köşesindeki "Aşağı Ok" simgesine tıklayarak terminal türünü PowerShell (PS) yerine standart Command Prompt (CMD) olarak değiştirin ve npm install komutunu bu yeni terminalde çalıştırın. CMD bu kısıtlamaya tabi değildir.
 
-🧪 Test Senaryoları (Eğitmen ve Denetçi İçin)
+## 🧪 Test Senaryoları (Eğitmen ve Denetçi İçin)
 
 Projenin 90 günlük rotasyon mantığını anında test edebilmek için özel bir force-rotation (manuel tetikleme) endpoint'i eklenmiştir. Aşağıdaki adımları standart bir Windows Komut İstemcisinden (CMD) sırasıyla test edebilirsiniz.
 
