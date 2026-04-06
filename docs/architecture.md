@@ -42,6 +42,13 @@ Sistemin operasyonel akışı şu sırayla gerçekleşir:
 
 Bu proje, konsepti ispatlamak (Proof of Concept) amacıyla geliştirilmiş bir eğitim prototipidir. Gerçek bir üretim ortamında (Production) şu iyileştirmelerle genişletilmesi öngörülmektedir:
 
+## 6. İstismar ve Savunma Senaryosu (Exploit & Defense)
+
+Bu proje, spesifik bir saldırı vektörünü engellemek üzere tasarlanmıştır.
+
+* **Başarılı İstismar Senaryosu (Zafiyet):** Saldırgan, sunucudaki bir zafiyet (Örn: LFI veya RCE) üzerinden mevcut "Private Key" değerini ele geçirir. Sabit anahtar kullanan geleneksel bir sistemde saldırgan, bu anahtarı kullanarak kendini "Admin" olarak gösteren sahte JWT'ler üretip (Forging) sistemi yıllarca sömürebilir.
+* **Uygulanan Savunma Mekanizması (Rotation & Invalidation):** Bu projede uygulanan 90 günlük rotasyon mekanizması sayesinde, ele geçirilen Private Key en fazla mevcut periyot sonuna kadar işe yarar. Sayaç dolduğunda (veya şüphe üzerine `/api/force-rotation` tetiklendiğinde) eski anahtar tamamen çöpe atılır. Saldırganın ürettiği sahte tokenlar anında **HTTP 403 (Invalid Signature)** hatasına düşer ve sistem erişimi otomatik olarak kesilir.
+
 * **Donanımsal Güvenlik (HSM/KMS):** Anahtarların sunucu belleği (RAM) yerine AWS KMS, Azure Key Vault veya donanımsal güvenlik modüllerinde (HSM) saklanması.
 * **Veritabanı Kalıcılığı (Persistence):** Anahtar ID'lerinin ve oluşturulma tarihlerinin Redis veya PostgreSQL gibi bir veritabanında saklanarak sunucu yeniden başlatılsa (Restart) bile 90 günlük rotasyon takibinin sıfırlanmadan devam etmesinin sağlanması.
 * **JWKS (JSON Web Key Set) Desteği:** Public Key'lerin `/well-known/jwks.json` gibi standart bir endpoint üzerinden yayınlanarak diğer API'lerin veya mikroservislerin merkezi olmayan (decentralized) şekilde token doğrulamasına izin verilmesi.
