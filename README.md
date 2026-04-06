@@ -150,3 +150,11 @@ Bu istek sonucunda sunucu tarafında eski anahtar kullanımdan kaldırılır ve 
 ### 4. Güvenlik Kanıtı: Rotasyon Sonrası Erişim Reddi (Invalidation)
 Sistemin temel amacı olan "eski sızmış şifrelerin iptali" durumunu kanıtlamak için, **2. adımda kullanılan eski token ile sisteme tekrar erişilmeye çalışılır.** Anahtar değiştiği için sistem eski imzayı tanımaz ve **HTTP 403 (invalid signature)** hatası fırlatarak erişimi güvenli bir şekilde keser.
 ![Erişim Reddi Kanıtı](screenshots/ss6.png)
+
+---
+
+## 📜 Lisans
+
+Bu proje [MIT Lisansı](https://opensource.org/licenses/MIT) altında lisanslanmıştır. 
+
+Tamamen **İstinye Üniversitesi - Güvenli Web Yazılımı Geliştirme** dersi kapsamında eğitim ve akademik değerlendirme amacıyla açık kaynak olarak geliştirilmiştir. Proje kodlarını dilediğiniz gibi inceleyebilir, kopyalayabilir ve kendi projelerinizde kullanabilirsiniz. Detaylar için projenin ana dizinindeki `LICENSE` dosyasına göz atabilirsiniz.
