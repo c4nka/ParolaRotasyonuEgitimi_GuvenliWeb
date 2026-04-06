@@ -11,6 +11,7 @@ const crypto = require('crypto');
  * Singleton deseni kullanılarak tüm uygulamanın aynı anahtar örneğine erişmesi sağlanır.
  */
 class KeyManager {
+    // TODO: Üretim (Production) ortamı için anahtarların sunucu belleği yerine AWS KMS veya Redis üzerinde tutulması sağlanmalı.
     /**
      * Sınıf başlatıldığında mevcut anahtar değerlerini null olarak atar
      * ve sistemin kullanacağı ilk anahtar çiftini anında üretir.
