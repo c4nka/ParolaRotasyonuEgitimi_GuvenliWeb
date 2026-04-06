@@ -16,7 +16,8 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 // Anahtarların rotasyona gireceği gün sınırı
 const ROTATION_DAYS = 90;
-
+// TODO: İlerleyen versiyonlarda bu 90 günlük süre .env dosyasından dinamik olarak çekilecek.
+// TODO: Rotasyon gerçekleştiğinde admin kullanıcısına Slack veya E-posta üzerinden bildirim gönderen bir servis entegre edilecek.
 /**
  * ------------------------------------------------------------------
  * CONTROLLER FONKSİYONLARI (Modülerlik ve okunabilirlik için ayrıldı)
