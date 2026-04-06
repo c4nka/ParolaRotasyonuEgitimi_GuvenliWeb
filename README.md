@@ -1,4 +1,4 @@
-![İstinye Üniversitesi Logosu](https://images.seeklogo.com/logo-png/61/2/istinye-universitesi-logo-png_seeklogo-610039.png)
+![İstinye Üniversitesi Logosu](https://istdunya.com/wp-content/uploads/2024/07/istinye-university-logo.png)
 
 # Güvenli Web Yazılımı: 90 Günlük Asimetrik Anahtar Rotasyonu (Key Rotation) API
 
