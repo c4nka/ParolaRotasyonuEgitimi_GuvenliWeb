@@ -58,7 +58,7 @@ npm : File ... cannot be loaded because running scripts is disabled on this syst
 ```
 Hatanın Sebebi: Windows PowerShell, güvenlik politikaları gereği dışarıdan gelen scriptlerin (npm komutları dahil) çalışmasını zararlı yazılım koruması amacıyla varsayılan olarak engeller.
 
-Çözüm 1: PowerShell İznini Düzenleme (Önerilen Kalıcı Çözüm)
+## Çözüm 1: PowerShell İznini Düzenleme (Önerilen Kalıcı Çözüm)
 
 Windows arama çubuğuna PowerShell yazın, sağ tıklayıp "Yönetici olarak çalıştır" (Run as Administrator) seçeneğini seçin.
 
@@ -68,7 +68,7 @@ Set-ExecutionPolicy RemoteSigned
 ```
 Gelen uyarıya Y (veya sistem dilinize göre E) yazarak onay verin. Ardından VS Code'u açıp npm install işlemini tekrar deneyin.
 
-Çözüm 2: Komut İstemcisi (CMD) Kullanımı (Hızlı Çözüm)
+## Çözüm 2: Komut İstemcisi (CMD) Kullanımı (Hızlı Çözüm)
 
 VS Code terminal penceresinin sağ üst köşesindeki "Aşağı Ok" simgesine tıklayarak terminal türünü PowerShell (PS) yerine standart Command Prompt (CMD) olarak değiştirin ve npm install komutunu bu yeni terminalde çalıştırın. CMD bu kısıtlamaya tabi değildir.
 
