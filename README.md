@@ -12,7 +12,7 @@
 **Öğrenci:** Raşit ÇANKAYA (2420191006)  
 **Üniversite / Bölüm:** İstinye Üniversitesi - Bilişim Güvenliği Teknolojisi (İÖ)  
 **Ders:** Güvenli Web Yazılımı Geliştirme  
-**Danışman:** [Danışman Adını Buraya Yazın]  
+**Danışman:** Keyvan Arasteh Abbasabad
 
 ---
 
