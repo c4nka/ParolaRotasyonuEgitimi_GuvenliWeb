@@ -79,7 +79,7 @@ npm start
 ```
 Konsolda [Güvenlik] Yeni RSA anahtar çifti başarıyla oluşturuldu. mesajını gördüğünüzde sistem API isteklerine hazırdır.
 
-##⚠️ Sık Karşılaşılan Hatalar ve Çözümleri (Troubleshooting)
+## ⚠️ Sık Karşılaşılan Hatalar ve Çözümleri (Troubleshooting)
 
 Windows PowerShell Hatası (npm : File ... cannot be loaded...): Windows PowerShell, güvenlik gereği npm scriptlerini engelleyebilir. 
 
