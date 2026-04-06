@@ -1,4 +1,4 @@
-![İstinye Üniversitesi Logosu](https://www.istinye.edu.tr/sites/default/files/2021-03/isu_logo_tr.png)
+![İstinye Üniversitesi Logosu](https://images.seeklogo.com/logo-png/61/2/istinye-universitesi-logo-png_seeklogo-610039.png)
 
 # Güvenli Web Yazılımı: 90 Günlük Asimetrik Anahtar Rotasyonu (Key Rotation) API
 
@@ -74,3 +74,76 @@ Sunucuyu başlatın:
 ```bash
 npm start
 ```
+Konsolda [Güvenlik] Yeni RSA anahtar çifti başarıyla oluşturuldu. mesajını gördüğünüzde sistem API isteklerine hazırdır.
+
+##⚠️ Sık Karşılaşılan Hatalar ve Çözümleri (Troubleshooting)
+
+Windows PowerShell Hatası (npm : File ... cannot be loaded...): Windows PowerShell, güvenlik gereği npm scriptlerini engelleyebilir. 
+
+Çözüm:
+
+PowerShell'i Yönetici olarak çalıştırın.
+
+Şu komutu girip Enter'a basın: 
+
+```bash
+Set-ExecutionPolicy RemoteSigned
+```
+
+Gelen uyarıya Y yazarak onay verin.
+
+## 🧪 Test Senaryoları (Eğitmen ve Denetçi İçin)
+
+Projenin rotasyon mantığını anında test edebilmek için özel bir uç nokta eklenmiştir. Standart bir Komut İstemcisi (CMD) üzerinden test edebilirsiniz.
+
+1. Sisteme Giriş ve Token Alımı:
+
+```bash
+curl.exe -X POST http://localhost:3000/api/login -H "Content-Type: application/json" -d "{\"username\": \"admin\", \"password\": \"securepassword\"}"
+```
+(Dönen "token" değerini kopyalayın)
+
+2. Güvenli Veriye Erişim Doğrulaması:
+   
+```bash
+curl.exe -X GET http://localhost:3000/api/secure-data -H "Authorization: Bearer <TOKEN>"
+```
+
+3. Rotasyonu Manuel Tetikleme (Zaman Atlaması Simülasyonu):
+
+```bash
+curl.exe -X POST http://localhost:3000/api/force-rotation
+```
+
+4. Rotasyon Sonrası Güvenlik Kanıtı (Erişim Reddi - Invalidation):
+2. adımı aynı token ile tekrar çalıştırın.
+
+Anahtar değiştiği için sistem HTTP 403 Forbidden (invalid signature) hatası fırlatacaktır. Bu, rotasyon mekanizmasının eski anahtarları sızmaya karşı başarıyla imha ettiğinin matematiksel kanıtıdır.
+
+## 📸 Ekran Görüntüleri ile Adım Adım Çalışma Kanıtı
+
+Aşağıdaki görseller, sistemin yerel ortamda (localhost) test edilme aşamalarını ve rotasyon mekanizmasının başarılı bir şekilde çalıştığını kanıtlamaktadır.
+
+### Sunucunun Başlatılması ve İlk Anahtarın Üretimi
+Sunucu `npm start` komutu ile ayağa kaldırıldığında, sistem otomatik olarak ilk RSA anahtar çiftini (ID: 1) üretir ve trafiğe hazır hale gelir.
+![Sunucu Başlatma](screenshots/ss1.png)
+![Sunucu Başlatma](screenshots/ss2.png)
+
+### 1. Sisteme Giriş ve Token Alımı
+Kullanıcı kimlik bilgileriyle API'ye istek atılır ve sisteme erişim için şifrelenmiş bir JWT elde edilir.
+![Sisteme Giriş ve Token](screenshots/ss3.png)
+
+### 2. Güvenli Veriye Erişim
+Alınan token, yetkilendirme başlığına (Authorization: Bearer) eklenerek korumalı veriye ulaşılır. Sistem token'ı doğrular ve 200 OK yanıtı ile veriyi döner.
+![Güvenli Veriye Erişim](screenshots/ss4.png)
+
+### 3. Rotasyonu Manuel Tetikleme (90 Gün Simülasyonu)
+Sistemin rotasyon mekanizmasını test etmek için `force-rotation` uç noktasına istek atılır.
+![Manuel Rotasyon Tetikleme](screenshots/ss5.png)
+
+Bu istek sonucunda sunucu tarafında eski anahtar kullanımdan kaldırılır ve anında **Yeni Anahtar ID: 2** üretilir. Bu işlem sunucu loglarına aşağıdaki gibi yansır:
+![Rotasyon Sunucu Logu](screenshots/ss7.png)
+
+### 4. Güvenlik Kanıtı: Rotasyon Sonrası Erişim Reddi (Invalidation)
+Sistemin temel amacı olan "eski sızmış şifrelerin iptali" durumunu kanıtlamak için, **2. adımda kullanılan eski token ile sisteme tekrar erişilmeye çalışılır.** Anahtar değiştiği için sistem eski imzayı tanımaz ve **HTTP 403 (invalid signature)** hatası fırlatarak erişimi güvenli bir şekilde keser.
+![Erişim Reddi Kanıtı](screenshots/ss6.png)
