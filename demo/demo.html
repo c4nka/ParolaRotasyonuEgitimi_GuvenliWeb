@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terminal Demo</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #cccccc;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 20px;
+      overflow: hidden;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .prompt {
+      color: #4CAF50;
+    }
+    .dir {
+      color: #2196F3;
+    }
+    .command {
+      color: #fff;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 16px;
+      background-color: #cccccc;
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    #terminal {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <script>
+    const lines = [
+      { text: "PS C:\\Projects\\ParolaRotasyonuEgitimi_GuvenliWeb> ", type: "prompt" },
+      { text: "npm install", type: "type", delay: 1000 },
+      { text: "\n\nadded 104 packages, and audited 105 packages in 2s\n\n11 packages are looking for funding\n  run `npm fund` for details\n\nfound 0 vulnerabilities", type: "output", delay: 1500 },
+      
+      { text: "\nPS C:\\Projects\\ParolaRotasyonuEgitimi_GuvenliWeb> ", type: "prompt" },
+      { text: "ls -la", type: "type", delay: 1000 },
+      { text: "\n\ndrwxr-xr-x   1 user user  4096 Apr  6 12:00 .\ndrwxr-xr-x   1 user user  4096 Apr  6 11:58 ..\n-rw-r--r--   1 user user   345 Apr  6 11:59 package.json\n-rw-r--r--   1 user user 36154 Apr  6 12:00 package-lock.json\ndrwxr-xr-x   1 user user  4096 Apr  6 11:59 src\ndrwxr-xr-x   1 user user  4096 Apr  6 11:59 docs\n-rw-r--r--   1 user user  7668 Apr  6 11:59 README.md\n-rw-r--r--   1 user user  1093 Apr  6 11:59 LICENSE", type: "output", delay: 800 },
+      
+      { text: "\nPS C:\\Projects\\ParolaRotasyonuEgitimi_GuvenliWeb> ", type: "prompt" },
+      { text: "npm start", type: "type", delay: 1000 },
+      { text: "\n\n> key-rotation-api@1.0.0 start\n> node src/server.js\n\n[Güvenlik] Yeni RSA anahtar çifti başarıyla oluşturuldu.\n[Bilgi] Sunucu 3000 portunda çalışıyor...", type: "output", delay: 1500 },
+      
+      { text: "\n\n[Devam etmek için API istekleri farklı bir sekmeden gönderiliyor...]\n", type: "output", delay: 2000 },
+
+      { text: "\nPS C:\\Projects\\ParolaRotasyonuEgitimi> ", type: "prompt" },
+      { text: "curl.exe -X POST http://localhost:3000/api/login -H \"Content-Type: application/json\" -d '{\"username\": \"admin\", \"password\": \"securepassword\"}'", type: "type", delay: 1500 },
+      { text: "\n\n{\"message\":\"Giriş başarılı\",\"token\":\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InV1aWQtMSJ9...[snip]\"}", type: "output", delay: 1000 },
+
+      { text: "\nPS C:\\Projects\\ParolaRotasyonuEgitimi> ", type: "prompt" },
+      { text: "curl.exe -X GET http://localhost:3000/api/secure-data -H \"Authorization: Bearer <TOKEN>\"", type: "type", delay: 1500 },
+      { text: "\n\n{\"message\":\"Güvenli veriye erişim onaylandı\",\"data\":\"Gizli Şirket Raporları - 2024\"}", type: "output", delay: 800 },
+
+      { text: "\nPS C:\\Projects\\ParolaRotasyonuEgitimi> ", type: "prompt" },
+      { text: "curl.exe -X POST http://localhost:3000/api/force-rotation", type: "type", delay: 1500 },
+      { text: "\n\n{\"message\":\"Key rotasyonu başarıyla tetiklendi. Eski veriler geçersiz kılındı.\"}", type: "output", delay: 1000 },
+
+      { text: "\nPS C:\\Projects\\ParolaRotasyonuEgitimi> ", type: "prompt" },
+      { text: "curl.exe -X GET http://localhost:3000/api/secure-data -H \"Authorization: Bearer <TOKEN>\"", type: "type", delay: 1500 },
+      { text: "\n\n{\"error\":\"Geçersiz veya süresi dolmuş token (invalid signature)\"}\nHTTP 403 Forbidden", type: "output", delay: 1000 },
+
+      { text: "\nPS C:\\Projects\\ParolaRotasyonuEgitimi> ", type: "prompt" },
+      { text: "echo \"Demo tamamlandı.\"", type: "type", delay: 1000 },
+      { text: "\n\nDemo tamamlandı.\n", type: "output", delay: 500 },
+      { text: "PS C:\\Projects\\ParolaRotasyonuEgitimi> ", type: "prompt" },
+    ];
+
+    const terminal = document.getElementById('terminal');
+    let cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    
+    async function runDemo() {
+      for (const line of lines) {
+        if (line.type === "prompt") {
+          let p = document.createElement('span');
+          p.innerHTML = `<span class="prompt">PS </span><span class="dir">${line.text.substring(3)}</span>`;
+          terminal.appendChild(p);
+        } else if (line.type === "output") {
+          await new Promise(r => setTimeout(r, line.delay || 500));
+          let o = document.createElement('span');
+          o.style.color = '#ccc';
+          o.textContent = line.text;
+          terminal.appendChild(o);
+        } else if (line.type === "type") {
+          let cmd = document.createElement('span');
+          cmd.className = 'command';
+          terminal.appendChild(cmd);
+          terminal.appendChild(cursor);
+          for (let i = 0; i < line.text.length; i++) {
+            cmd.textContent += line.text[i];
+            window.scrollTo(0, document.body.scrollHeight);
+            await new Promise(r => setTimeout(r, 40 + Math.random() * 60));
+          }
+          await new Promise(r => setTimeout(r, line.delay || 500));
+        }
+        terminal.appendChild(cursor);
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+      cursor.style.display = 'none'; // Stop blinking at the very end (optional)
+      
+      // Let the browser subagent know we're fully done
+      let done = document.createElement('div');
+      done.id = 'demo-done';
+      done.style.display = 'none';
+      document.body.appendChild(done);
+    }
+    
+    // Start after a very short delay
+    setTimeout(runDemo, 500);
+  </script>
+</body>
+</html>
