@@ -135,3 +135,5 @@ Sistemin temel amacı olan "eski sızmış şifrelerin iptali" durumunu kanıtla
 - **Öğrenci No:** 2420191006
 - **Üniversite:** İstinye Üniversitesi
 - **Bölüm:** Bilişim Güvenliği Teknolojisi (İÖ)
+
+Bu araç Güvenli Web Yazılımı Geliştirme dersi kapsamında ve tamamen eğitim/araştırma amaçlı geliştirilmiştir.
