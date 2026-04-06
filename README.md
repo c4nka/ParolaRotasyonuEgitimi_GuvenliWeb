@@ -123,6 +123,12 @@ curl.exe -X POST http://localhost:3000/api/force-rotation
 
 Anahtar değiştiği için sistem HTTP 403 Forbidden (invalid signature) hatası fırlatacaktır. Bu, rotasyon mekanizmasının eski anahtarları sızmaya karşı başarıyla imha ettiğinin matematiksel kanıtıdır.
 
+## 🎬 Demo
+
+Aşağıdaki ekran kaydında projenin kurulum, kullanım, hata yakalama (invalid input), temel analiz süreci ve entegre test süreçlerinin adım adım nasıl çalıştığını görebilirsiniz:
+
+![Project Demo](./demo/demo.html)
+
 ## 📸 Ekran Görüntüleri ile Adım Adım Çalışma Kanıtı
 
 Aşağıdaki görseller, sistemin yerel ortamda (localhost) test edilme aşamalarını ve rotasyon mekanizmasının başarılı bir şekilde çalıştığını kanıtlamaktadır.
