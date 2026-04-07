@@ -128,6 +128,7 @@ Anahtar değiştiği için sistem HTTP 403 Forbidden (invalid signature) hatası
 Aşağıdaki ekran kaydında projenin kurulum, kullanım, hata yakalama (invalid input), temel analiz süreci ve entegre test süreçlerinin adım adım nasıl çalıştığını görebilirsiniz:
 
 [Demo](./demo/demo.html)
+<br>
 <a href="https://youtu.be/T1zPAWk1fxM" target="_blank">Demo Videosunu İzlemek İçin Tıklayın</a>
 
 ## 📸 Ekran Görüntüleri ile Adım Adım Çalışma Kanıtı
