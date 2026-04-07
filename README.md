@@ -131,6 +131,9 @@ Aşağıdaki ekran kaydında projenin kurulum, kullanım, hata yakalama (invalid
 <br>
 <a href="https://youtu.be/T1zPAWk1fxM" target="_blank">Demo Videosunu İzlemek İçin Tıklayın</a>
 
+<video src="https://github.com/c4nka/ParolaRotasyonuEgitimi_GuvenliWeb/raw/refs/heads/main/demo/demo.mp4" width="100%" controls>
+</video>
+
 ## 📸 Ekran Görüntüleri ile Adım Adım Çalışma Kanıtı
 
 Aşağıdaki görseller, sistemin yerel ortamda (localhost) test edilme aşamalarını ve rotasyon mekanizmasının başarılı bir şekilde çalıştığını kanıtlamaktadır.
